@@ -1,14 +1,20 @@
-import './App.css';
-import React from "react"
-import { ChakraProvider } from '@chakra-ui/react'
+import React, { useState } from "react";
+import ChatApp from "./Components/ChatApp";
+import theme from "./Components/theme";
+import { ChakraProvider, CSSReset } from "@chakra-ui/react";
+import Home from "./Components/Home";
+import {BrowserRouter} from "react-router-dom"
+import AllRoutes from "./Pages/AllRoutes";
 
-
-function App() {
+const App = () => {
   return (
-    <ChakraProvider>
-     <h1>Test</h1>
-  </ChakraProvider>
+    <BrowserRouter>
+    <ChakraProvider theme={theme}>
+      <CSSReset />
+      <AllRoutes />
+    </ChakraProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
