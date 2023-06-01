@@ -21,6 +21,7 @@ const ChatApp = () => {
   const params = useParams();
   const [message, setMessage] = useState([])
   const [person, setPerson] = useState('user')
+  const [loading, setLoading] = useState(false)
   const toast = useToast()
 
   const getMessages = () => {
@@ -45,6 +46,7 @@ const ChatApp = () => {
 
   const handleSendMessage = () => {
     if (inputText.trim() !== "") {
+      setLoading(true)
       const payload = {
         "uuid": `${params.uuid}`,
         "user": `${person}`,
@@ -62,6 +64,7 @@ const ChatApp = () => {
           position:"top"
         })
         getMessages()
+        setLoading(false)
       })
       .catch((err) =>{
         toast({
@@ -73,6 +76,7 @@ const ChatApp = () => {
           position: "top"
         })
         getMessages()
+        setLoading(false)
       })
       setInputText("");
     }
@@ -128,7 +132,7 @@ const ChatApp = () => {
           mr={2}
         />
         <Button colorScheme="blue" onClick={handleSendMessage} w="auto">
-          <Icon as={FaRegPaperPlane} />
+          {loading ? "Sending..." : <Icon as={FaRegPaperPlane} />}
         </Button>
       </Flex>
     </VStack>
